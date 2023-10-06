@@ -15,7 +15,7 @@ class EventController extends Controller
 
     public function index()
     {
-        $event = Event::all();
+        $event = Event::select('id','subject')->get();
         return response()->json([
             'status' => 'success',
             'event' => $event,
@@ -27,17 +27,13 @@ class EventController extends Controller
         $request->validate([
             'subject' => ['required','string','max:255'],
             'desc_text' => ['required','string','max:255'],
-            'held_at' => ['required','string','max:255'],
-            'created_at' => ['date'],
-            'updated_at' => ['date'],
+            'held_at' => ['required','date'],
         ]);
         $event = Event::create([
             'subject' => $request->subject,
             'desc_text' => $request->desc_text,
             'users_id' => Auth::user()->id,
             'held_at' => $request->held_at,
-            'created_at' => $request->created_at,
-            'updated_at' => $request->updated_at,
         ]);
 
         return response()->json([
@@ -87,6 +83,28 @@ class EventController extends Controller
         return response()->json([
             'status' => 'success',
             'message' => 'Event Successfully Deleted',
+            'event' => $event,
+        ]);
+    }
+
+    public function attend($id)
+    {
+        $event = Event::find($id);
+
+        $user = Auth::user()->fullname;
+        $attendee = $event->user_attend;
+
+        if (empty($attendee)) {
+            $event->user_attend = $user;
+        } else {
+            $event->user_attend .= ', ' . $user;
+        }
+
+        $event->save();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'You are attending the event',
             'event' => $event,
         ]);
     }
