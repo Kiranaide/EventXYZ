@@ -33,6 +33,6 @@ Route::group(['middleware' => 'api'], function () {
     Route::post('event/{id}', [EventController::class, 'attend']);
 });
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+Route::middleware('api')->get('/user', function (Request $request) {
     return $request->user();
 });
