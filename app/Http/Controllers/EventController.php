@@ -40,11 +40,12 @@ class EventController extends Controller
 
     public function show($id)
     {
-        $event = Event::find($id);
-        return response()->json([
-            'status' => 'success',
-            'event' => $event,
-        ]);
+        $events = Event::find($id);
+        // return response()->json([
+        //     'status' => 'success',
+        //     'event' => $event,
+        // ]);
+        return view(`components.table-event`)->with('events', $events);
     }
 
     public function update(Request $request, $id)
