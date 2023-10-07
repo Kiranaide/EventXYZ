@@ -25,7 +25,7 @@ Route::group(['middleware' => 'api', 'prefix' => 'auth'], function ($router) {
 });
 
 
-Route::group(['middleware' => 'api'], function () {
+Route::group(['middleware' => 'auth'], function () {
     Route::post('event', [EventController::class, 'store']);
     Route::get('event', [EventController::class, 'index']);
     Route::get('event/{id}', [EventController::class, 'show']);
@@ -33,6 +33,6 @@ Route::group(['middleware' => 'api'], function () {
     Route::post('event/{id}', [EventController::class, 'attend']);
 });
 
-Route::middleware('api')->get('/user', function (Request $request) {
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });

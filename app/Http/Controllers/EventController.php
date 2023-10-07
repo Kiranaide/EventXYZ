@@ -8,11 +8,6 @@ use Illuminate\Support\Facades\Auth;
 
 class EventController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth:api');
-    }
-
     public function index()
     {
         $event = Event::select('id','subject')->get();

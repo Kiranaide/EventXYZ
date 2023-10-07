@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
@@ -17,7 +19,7 @@ class AuthController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'email' => 'required|email',
-            'password' => 'required|string|',
+            'password' => 'required',
         ]);
         if ($validator->fails()) {
             return response()->json($validator->errors(), 422);
@@ -52,7 +54,11 @@ class AuthController extends Controller
 
     public function logout() {
         auth()->logout();
-        return response()->json(['message' => 'Successfully Logged out']);
+        $response = response()->json(['message' => 'Successfully Logged out']);
+
+        $delete = Cookie::forget('jwt');
+
+        return $response->withCookie($delete);
     }
 
     public function refresh() {
@@ -63,12 +69,16 @@ class AuthController extends Controller
         return response()->json(auth()->user());
     }
 
-    protected function createNewToken($token){
-        return response()->json([
+    protected function createNewToken($token)
+    {
+        $response = response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',
-            'expires_in' => auth()->factory()->getTTL() * 60,
-            'user' => auth()->user()
+            'expires_in' => auth('api')->factory()->getTTL() * 60,
+            'user' => auth('api')->user()
         ]);
+
+        $cookie = cookie('jwt', $token, 60);
+        return $response->withCookie($cookie);
     }
 }
