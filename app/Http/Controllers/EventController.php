@@ -15,7 +15,7 @@ class EventController extends Controller
             'status' => 'success',
             'event' => $event,
         ]);
-        // return view('components.event-table', compact('events'));
+        // return view('components.event-table')->with('events', $event);
     }
 
     public function store(Request $request)
@@ -42,11 +42,8 @@ class EventController extends Controller
     public function show($id)
     {
         $event = Event::find($id);
-        // return response()->json([
-        //     'status' => 'success',
-        //     'event' => $event,
-        // ]);
-        return view('components.event-table', [
+        return response()->json([
+            'status' => 'success',
             'event' => $event,
         ]);
     }

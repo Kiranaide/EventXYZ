@@ -1,17 +1,17 @@
-<div class="m-4">
-    <table class="w-full">
+<div>
+    <table>
         <thead>
-            <tr class="text-white text-center">
-                <td>Events</td>
-                <td>Description</td>
-                <td>Held At</td>
-                <td>Action</td>
+            <tr>
+                <th>Event</th>
+                <th>Description</th>
+                <th>Held At</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
             @foreach ($events as $event)
                 <tr>
-                    <td>Event 1</td>
+                    <td>{{$events->subject}}</td>
                 </tr>
             @endforeach
         </tbody>
