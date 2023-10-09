@@ -1,3 +1,5 @@
+@props(['events'])
+
 <div class="m-4">
     <table class="w-full">
         <thead>
@@ -11,10 +13,7 @@
         <tbody>
             @foreach ($events as $event)
                 <tr>
-                    <td>{{ $event->subject }}</td>
-                    <td>{{ $event->desc_text }}</td>
-                    <td>{{ $event->held_at }}</td>
-                    <td>{{ $event->user_attend }}</td>
+                    <td>{{$event->subject}}</td>
                 </tr>
             @endforeach
         </tbody>
