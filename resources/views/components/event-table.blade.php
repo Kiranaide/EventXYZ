@@ -1,6 +1,7 @@
 @props(['eventData'])
 
-<div class="m-4">
+<div class="mx-4 my-8 flex flex-col gap-4">
+    <button class="rounded-md bg-white py-4 px-4">Add Data</button>
     <table class="w-full">
         <thead>
             <tr class="text-white text-center">
