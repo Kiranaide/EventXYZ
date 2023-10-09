@@ -1,5 +1,3 @@
-@props(['events'])
-
 <div class="m-4">
     <table class="w-full">
         <thead>
@@ -13,7 +11,7 @@
         <tbody>
             @foreach ($events as $event)
                 <tr>
-                    <td>{{$event->subject}}</td>
+                    <td>Event 1</td>
                 </tr>
             @endforeach
         </tbody>

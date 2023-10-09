@@ -10,12 +10,12 @@ class EventController extends Controller
 {
     public function index()
     {
-        $events = Event::select('id','subject')->get();
-        // return response()->json([
-        //     'status' => 'success',
-        //     'event' => $events,
-        // ]);
-        return view('components.event-table', compact('events'));
+        $event = Event::select('id','subject')->get();
+        return response()->json([
+            'status' => 'success',
+            'event' => $event,
+        ]);
+        // return view('components.event-table', compact('events'));
     }
 
     public function store(Request $request)

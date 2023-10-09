@@ -13,7 +13,7 @@ class EventTable extends Component
      */
     public function __construct()
     {
-        //
+        
     }
 
     /**

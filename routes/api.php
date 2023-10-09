@@ -25,7 +25,7 @@ Route::group(['middleware' => 'api', 'prefix' => 'auth'], function ($router) {
 });
 
 
-Route::group(['middleware' => 'auth'], function () {
+Route::group(['middleware' => 'api','web'], function () {
     Route::post('event', [EventController::class, 'store']);
     Route::get('event', [EventController::class, 'index']);
     Route::get('event/{id}', [EventController::class, 'show']);
