@@ -8,12 +8,13 @@ use Illuminate\View\Component;
 
 class EventTable extends Component
 {
+    public $eventData;
     /**
      * Create a new component instance.
      */
-    public function __construct()
+    public function __construct($eventData)
     {
-        //
+        $this->eventData = $eventData;
     }
 
     /**

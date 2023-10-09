@@ -3,6 +3,7 @@
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,9 +20,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+// Route::get('/dashboard', [EventController::class, 'index'])->middleware(['auth','api'])->name('dashboard');
+
+Route::group(['middleware' => 'api',], function () {
+    Route::post('/dashboard', [EventController::class, 'store']);
+    Route::get('/dashboard', [EventController::class, 'index']);
+    Route::get('/dashboard/{id}', [EventController::class, 'show']);
+    Route::delete('/dashboard/{id}', [EventController::class, 'destroy']);
+    Route::post('/dashboard/{id}', [EventController::class, 'attend']);
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
