@@ -1,4 +1,4 @@
-@props(['eventData'])
+@props(['listEvent'])
 
 <div class="mx-4 my-8 flex flex-col gap-4">
     <button class="rounded-md bg-white py-4 px-4">Add Data</button>
@@ -15,7 +15,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($eventData as $event)
+            @foreach ($listEvent as $event)
                 <tr class="text-white text-center">
                     <td>{{$event->subject}}</td>
                     <td>{{$event->desc_text}}</td>

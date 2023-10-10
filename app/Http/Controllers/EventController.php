@@ -10,13 +10,13 @@ class EventController extends Controller
 {
     public function index()
     {
-        $eventData = Event::select('id','subject','desc_text','held_at','user_attend')->get();
+        $listEvent = Event::select('id','subject','desc_text','held_at','user_attend')->get();
         // return response()->json([
         //     'status' => 'success',
         //     'event' => $event,
         // ]);
         return view('dashboard', [
-            'eventData' => $eventData
+            'listEvent' => $listEvent
         ]);
     }
 
@@ -34,10 +34,14 @@ class EventController extends Controller
             'held_at' => $request->held_at,
         ]);
 
-        return response()->json([
-            'status' => 'success',
-            'message' => 'Event Successfully Created',
-            'event' => $event,
+        // return response()->json([
+        //     'status' => 'success',
+        //     'message' => 'Event Successfully Created',
+        //     'event' => $event,
+        // ]);
+
+        return view('dashboard', [
+            'submitEvent' => $event
         ]);
     }
 
